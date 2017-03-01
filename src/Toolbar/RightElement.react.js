@@ -19,6 +19,7 @@ const propTypes = {
     onRightElementPress: PropTypes.func,
     onSearchClearRequest: PropTypes.func.isRequired,
     onSearchPress: PropTypes.func.isRequired,
+    onFiltersPress: PropTypes.func.isRequired,
 };
 const defaultProps = {
     rightElement: null,
@@ -72,6 +73,14 @@ class RightElement extends PureComponent {
             onSearchPress();
         }
     };
+    onFiltersPressed = () => {
+        const { onFiltersPress } = this.props;
+
+        if (isFunction(onFiltersPress)) {
+            onFiltersPress();
+        }
+    };
+
     render() {
         const {
             isSearchActive,
@@ -162,8 +171,22 @@ class RightElement extends PureComponent {
                         onPress={this.onSearchPressed}
                     />,
                 );
+                if (rightElement.filters) {
+                    result.push(
+                        <IconToggle
+                            key="filtersIcon"
+                            name="filter-list"
+                            color={flattenRightElement.color}
+                            size={size}
+                            style={flattenRightElement}
+                            onPress={this.onFiltersPressed}
+                        />,
+                    );
+                }
             }
         }
+
+        console.log('ALALA', rightElement);
 
         if (rightElement && rightElement.menu && !isSearchActive) {
             result.push(
