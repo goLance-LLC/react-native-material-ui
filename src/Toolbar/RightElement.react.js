@@ -186,8 +186,6 @@ class RightElement extends PureComponent {
             }
         }
 
-        console.log('ALALA', rightElement);
-
         if (rightElement && rightElement.menu && !isSearchActive) {
             result.push(
                 <View key="menuIcon">
