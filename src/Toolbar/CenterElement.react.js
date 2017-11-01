@@ -1,7 +1,7 @@
 /* eslint-disable import/no-unresolved, import/extensions */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Animated, TouchableWithoutFeedback, Text, TextInput, Easing } from 'react-native';
+import { Animated, TouchableWithoutFeedback, Text, TextInput, Easing, Platform, View } from 'react-native';
 /* eslint-enable import/no-unresolved, import/extensions */
 import { ViewPropTypes } from '../utils';
 
@@ -136,7 +136,7 @@ class CenterElement extends PureComponent {
             );
         } else if (typeof centerElement === 'string') {
             content = (
-                <Text numberOfLines={1} style={styles.titleText}>
+                <Text numberOfLines={1} style={[styles.titleText]}>
                     {centerElement}
                 </Text>
             );
@@ -149,10 +149,19 @@ class CenterElement extends PureComponent {
                 <Animated.View
                     style={[
                         styles.centerElementContainer,
-                        { opacity: opacityValue },
+                        { opacity: opacityValue, justifyContent: 'center' },
                     ]}
                 >
-                    {content}
+                    <Animated.View
+                        style={{
+                            flex: 1,
+                            justifyContent: 'center',
+                            opacity: opacityValue,
+                        }}
+                    >
+                        {content}
+                    </Animated.View>
+
                 </Animated.View>
             </TouchableWithoutFeedback>
         );
